@@ -116,7 +116,7 @@ export const createSyllabus = async (req: Request, res: Response) => {
 
 export const updateSyllabus = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
     const { fileUrl, fileName, version, description } = req.body;
 
     let updated: any = null;
@@ -154,7 +154,7 @@ export const updateSyllabus = async (req: Request, res: Response) => {
 
 export const deleteSyllabus = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
 
     try {
       await dbQuery(`DELETE FROM syllabus WHERE id = $1`, [id]);

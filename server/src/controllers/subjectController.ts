@@ -82,7 +82,7 @@ export const getSubjects = async (req: Request, res: Response) => {
 
 export const getSubjectById = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
     let subject: any = null;
     let syllabus: any = null;
     let caRule: any = null;
@@ -193,7 +193,7 @@ export const createSubject = async (req: Request, res: Response) => {
 
 export const updateSubject = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
     const { specializationId, semesterId, courseCode, name, subjectType, credits, description, status } = req.body;
 
     let updated: any = null;
@@ -239,7 +239,7 @@ export const updateSubject = async (req: Request, res: Response) => {
 
 export const deleteSubject = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
 
     try {
       await dbQuery(`DELETE FROM subjects WHERE id = $1`, [id]);

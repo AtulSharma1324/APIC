@@ -82,7 +82,7 @@ export const createSpecialization = async (req: Request, res: Response) => {
 
 export const updateSpecialization = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
     const { programId, code, name, description, status } = req.body;
 
     let updatedSpec: any = null;
@@ -122,7 +122,7 @@ export const updateSpecialization = async (req: Request, res: Response) => {
 
 export const deleteSpecialization = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
 
     try {
       await dbQuery(`DELETE FROM specializations WHERE id = $1`, [id]);

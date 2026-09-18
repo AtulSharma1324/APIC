@@ -101,7 +101,7 @@ export const createCARule = async (req: Request, res: Response) => {
 
 export const updateCARule = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
     const { programId, semesterId, totalCa, requiredCa, bestOf, weightagePercentage, description } = req.body;
 
     let updated: any = null;
@@ -145,7 +145,7 @@ export const updateCARule = async (req: Request, res: Response) => {
 
 export const deleteCARule = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
 
     try {
       await dbQuery(`DELETE FROM ca_rules WHERE id = $1`, [id]);

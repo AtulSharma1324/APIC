@@ -33,7 +33,7 @@ export const getPrograms = async (req: Request, res: Response) => {
 
 export const getProgramById = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
     let program: any = null;
     let specializations: any[] = [];
     let semesters: any[] = [];
@@ -107,7 +107,7 @@ export const createProgram = async (req: Request, res: Response) => {
 
 export const updateProgram = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
     const { code, name, description, durationYears, totalSemesters, status } = req.body;
 
     let updatedProg: any = null;
@@ -149,7 +149,7 @@ export const updateProgram = async (req: Request, res: Response) => {
 
 export const deleteProgram = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
 
     try {
       await dbQuery(`DELETE FROM programs WHERE id = $1`, [id]);

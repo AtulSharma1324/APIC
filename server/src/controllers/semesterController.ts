@@ -83,7 +83,7 @@ export const createSemester = async (req: Request, res: Response) => {
 
 export const updateSemester = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
     const { programId, semesterNumber, name, status } = req.body;
 
     let updated: any = null;
@@ -121,7 +121,7 @@ export const updateSemester = async (req: Request, res: Response) => {
 
 export const deleteSemester = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id as string, 10);
 
     try {
       await dbQuery(`DELETE FROM semesters WHERE id = $1`, [id]);
