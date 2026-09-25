@@ -20,21 +20,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Configure CORS
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:3000',
-  process.env.FRONTEND_URL
-].filter(Boolean) as string[];
-
 app.use(cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps, curl, or Postman)
-    if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
-      callback(null, true);
-    } else {
-      callback(null, true); // Fallback tolerant for deployment flexibility
-    }
-  },
+  origin: true,
   credentials: true
 }));
 
@@ -74,9 +61,12 @@ app.get('/', (req: Request, res: Response) => {
 // Centralized Error Handling Middleware
 app.use(errorHandler);
 
-// Bind server for cloud hosting (Render / Vercel / Local)
-app.listen(PORT, () => {
-  console.log(`🌐 Academic Info System Server listening on port ${PORT}`);
-});
+// Bind server for cloud hosting (Render / Local) when not running as Vercel serverless function
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`🌐 Academic Info System Server listening on port ${PORT}`);
+  });
+}
 
 export default app;
+
